@@ -13,10 +13,8 @@
       
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
     <script>
@@ -32,21 +30,26 @@
         firebase.initializeApp(config);
 
         var database = firebase.database();
-        console.log(database);
+        // console.log(database);
 
-        crud_you = function(userId, email, name, avatar){
+        crudYou = function(userId, yourEmail, yourName, avatar){
             firebase.database().ref('users/' + userId).set(
                 {
                     username: userId,
-                    email: email,
+                    email: yourEmail,
+                    name: yourName,
                     profile_picture: avatar
                 }
             )
 
         }
 
-        var wtf = crud_you(00001, "kyle fu", "https://secure.i.telegraph.co.uk/multimedia/archive/03370/doge_3370416k.jpg");
-        alert(wtf);
+        for(var ant = 0; ant < 20; ant++){
+            heyYou = crudYou(ant, "guy-" + ant + "@gmail.com" , "Guy "+ ant, "https://secure.i.telegraph.co.uk/multimedia/archive/03370/doge_3370416k.jpg");
+        }
+
+        // var heyYou = crud_you(00001, "kyle@dimstar.io", "kyle fu", "https://secure.i.telegraph.co.uk/multimedia/archive/03370/doge_3370416k.jpg");
+        console.log(heyYou);
     </script>
   </body>
 </html>
