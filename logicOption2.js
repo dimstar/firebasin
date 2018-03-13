@@ -18,10 +18,15 @@ var config = {
   
   var users = [];
   
-  var crud_counter = function(value){
-    database.ref('counter/main' ).set({
-      count: value
-    });
+  var crud_counter = function(value, $dowot = 'set'){
+      if($dowot === 'set'){
+        database.ref('counter/main' ).set({
+            count: value
+          });            
+      }else if($dowot === 'get'){
+
+      }
+    
     return value;
   }
   
@@ -29,16 +34,23 @@ var config = {
   
   // At the initial load, get a snapshot of the current data.
   database.ref().on('value', function(snapshot){
-    console.log(snapshot.val());
+    // console.log(snapshot.val());
   
     userWrapper = snapshot.val();
     
     $(document.body).append("<br><br>");
+
+    console.log("counter val: " + snapshot.val().counter.main.count);
+
+    clickCounter = snapshot.val().counter.main.count;
+
+    $('#click-value').text(clickCounter);
+    
   
-    userWrapper.users.forEach(element => {
-        var userLine = JSON.stringify(element);
-        $(document.body).append(userLine);
-    });
+    // userWrapper.users.forEach(element => {
+    //     var userLine = JSON.stringify(element);
+    //     $(document.body).append(userLine);
+    // });
   },
   function(errorObj){
     console.log(errorObj);
@@ -61,7 +73,7 @@ var config = {
     $("#click-value").text(clickCounter);
   
     // Reduce the clickCounter by 1
-    clickCounter--
+    clickCounter--;
   
     // Alert User and reset the counter
     if( clickCounter === 0){
